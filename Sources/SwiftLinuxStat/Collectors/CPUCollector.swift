@@ -18,14 +18,14 @@ public extension SwiftLinuxStat {
         public var diffCPUData: CPUData {
             var result: CPUData
             result.name = cpuDataLast.name
-            result.user = cpuDataFirst.user - cpuDataLast.user
-            result.nice = cpuDataFirst.nice - cpuDataLast.nice
-            result.system = cpuDataFirst.system - cpuDataLast.system
-            result.idle = cpuDataFirst.idle - cpuDataLast.idle
-            result.iowait = cpuDataFirst.iowait - cpuDataLast.iowait
-            result.irq = cpuDataFirst.irq - cpuDataLast.irq
-            result.softirq = cpuDataFirst.softirq - cpuDataLast.softirq
-            result.steal = cpuDataFirst.steal - cpuDataLast.steal
+            result.user = cpuDataLast.user - cpuDataFirst.user
+            result.nice = cpuDataLast.nice - cpuDataFirst.nice
+            result.system = cpuDataLast.system - cpuDataFirst.system
+            result.idle = cpuDataLast.idle - cpuDataFirst.idle
+            result.iowait = cpuDataLast.iowait - cpuDataFirst.iowait
+            result.irq = cpuDataLast.irq - cpuDataFirst.irq
+            result.softirq = cpuDataLast.softirq - cpuDataFirst.softirq
+            result.steal = cpuDataLast.steal - cpuDataFirst.steal
 
             return result
         }

@@ -18,20 +18,20 @@ public extension SwiftLinuxStat {
         public var diskDataLast: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         public var diffDiskData: DiskData {
             var result: DiskData
-            result.majorNumber = diskDataFirst.majorNumber
-            result.minorNumber = diskDataFirst.minorNumber
-            result.deviceName = diskDataFirst.deviceName
-            result.readIO = diskDataFirst.readIO - diskDataLast.readIO
-            result.readMerges = diskDataFirst.readMerges - diskDataLast.readMerges
-            result.readSectors = diskDataFirst.readSectors - diskDataLast.readSectors
-            result.readTicks = diskDataFirst.readTicks - diskDataLast.readTicks
-            result.writeIO = diskDataFirst.writeIO - diskDataLast.writeIO
-            result.writeMerges = diskDataFirst.writeMerges - diskDataLast.writeMerges
-            result.writeSectors = diskDataFirst.writeSectors - diskDataLast.writeSectors
-            result.writeTicks = diskDataFirst.writeTicks - diskDataLast.writeTicks
-            result.inFlight = diskDataFirst.inFlight - diskDataLast.inFlight
-            result.ioTicks = diskDataFirst.ioTicks - diskDataLast.ioTicks
-            result.timeInQueue = diskDataFirst.timeInQueue - diskDataLast.timeInQueue
+            result.majorNumber = diskDataLast.majorNumber
+            result.minorNumber = diskDataLast.minorNumber
+            result.deviceName = diskDataLast.deviceName
+            result.readIO = diskDataLast.readIO - diskDataFirst.readIO
+            result.readMerges = diskDataLast.readMerges - diskDataFirst.readMerges
+            result.readSectors = diskDataLast.readSectors - diskDataFirst.readSectors
+            result.readTicks = diskDataLast.readTicks - diskDataFirst.readTicks
+            result.writeIO = diskDataLast.writeIO - diskDataFirst.writeIO
+            result.writeMerges = diskDataLast.writeMerges - diskDataFirst.writeMerges
+            result.writeSectors = diskDataLast.writeSectors - diskDataFirst.writeSectors
+            result.writeTicks = diskDataLast.writeTicks - diskDataFirst.writeTicks
+            result.inFlight = diskDataLast.inFlight - diskDataFirst.inFlight
+            result.ioTicks = diskDataLast.ioTicks - diskDataFirst.ioTicks
+            result.timeInQueue = diskDataLast.timeInQueue - diskDataFirst.timeInQueue
 
             return result
         }
