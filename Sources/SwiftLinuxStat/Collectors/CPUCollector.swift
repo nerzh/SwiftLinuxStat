@@ -12,10 +12,10 @@ public extension SwiftLinuxStat {
 
     class CPU {
 
-        var scanTime: Seconds = 1
-        var cpuDataFirst: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
-        var cpuDataLast: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
-        var diffCPUData: CPUData {
+        public var scanTime: Seconds = 1
+        public var cpuDataFirst: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
+        public var cpuDataLast: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
+        public var diffCPUData: CPUData {
             var result: CPUData
             result.name = cpuDataLast.name
             result.user = cpuDataFirst.user - cpuDataLast.user
@@ -32,7 +32,7 @@ public extension SwiftLinuxStat {
 
         public init() {}
 
-        func cpuLoad(name: String = "cpu", current: Bool = true, scanTime: Seconds = 1) -> Percent {
+        public func cpuLoad(name: String = "cpu", current: Bool = true, scanTime: Seconds = 1) -> Percent {
             var result: Percent = 0
             if current { update(name: name, scanTime: scanTime) }
             let tTotal: Int = diffCPUData.user + diffCPUData.nice + diffCPUData.system + diffCPUData.idle + diffCPUData.iowait + diffCPUData.irq + diffCPUData.softirq + diffCPUData.steal
@@ -44,7 +44,7 @@ public extension SwiftLinuxStat {
         }
 
         @discardableResult
-        func update(name: String, scanTime: Seconds = 1) -> Self {
+        public func update(name: String, scanTime: Seconds = 1) -> Self {
             self.scanTime = scanTime
             cpuDataFirst = currentCPUData(name: name)
             usleep(UInt32(Seconds(usleepSecond) * scanTime))
@@ -78,7 +78,7 @@ public extension SwiftLinuxStat {
         ///    steal: time “stolen” from your processor to run other operating systems in a virtualized environment
         ///    guest: time spent on processes running on a virtual CPU with normal priority
         ///    guest_nice: time spent on processes running on a virtual CPU with niced priority
-        func getCPUData(_ line: String) -> CPUData {
+        public func getCPUData(_ line: String) -> CPUData {
             var result: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
             let pattern: String = #"^\s*(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+).*"#
             let matches: [Int: String] = line.regexp(pattern)

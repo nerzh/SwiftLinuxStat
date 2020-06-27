@@ -13,10 +13,10 @@ public extension SwiftLinuxStat {
 
     class Disk {
 
-        var scanTime: Seconds = 1
-        var diskDataFirst: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        var diskDataLast: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        var diffDiskData: DiskData {
+        public var scanTime: Seconds = 1
+        public var diskDataFirst: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        public var diskDataLast: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        public var diffDiskData: DiskData {
             var result: DiskData
             result.majorNumber = diskDataFirst.majorNumber
             result.minorNumber = diskDataFirst.minorNumber
@@ -39,7 +39,7 @@ public extension SwiftLinuxStat {
         public init() {}
 
         /// 9       2 md2 1662164 0 32184250 0 247353783 0 7830748704 0 0 0 0
-        func diskLoad(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
+        public func diskLoad(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad
             if current { update(name: name, scanTime: scanTime) }
             result.read = diffDiskData.readSectors * SwiftLinuxStat.diskSectorSize
@@ -48,7 +48,7 @@ public extension SwiftLinuxStat {
             return result
         }
 
-        func diskLoadPerSecond(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
+        public func diskLoadPerSecond(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad = diskLoad(name: name, current: current, scanTime: scanTime)
             result.read = result.read / self.scanTime
             result.write = result.write / self.scanTime
@@ -56,7 +56,7 @@ public extension SwiftLinuxStat {
             return result
         }
 
-        func diskIOs(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskIOs {
+        public func diskIOs(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskIOs {
             var result: DiskIOs
             if current { update(name: name, scanTime: scanTime) }
             result.readIOs = Float(diffDiskData.readIO) / Float(self.scanTime)
@@ -65,13 +65,13 @@ public extension SwiftLinuxStat {
             return result
         }
 
-        func diskBusy(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> Percent {
+        public func diskBusy(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> Percent {
             if current { update(name: name, scanTime: scanTime) }
             return 100 * Float(diffDiskData.ioTicks) / (1000 * Float(self.scanTime))
         }
 
         @discardableResult
-        func update(name: String? = nil, scanTime: Seconds = 1) -> Self {
+        public func update(name: String? = nil, scanTime: Seconds = 1) -> Self {
             self.scanTime = scanTime
             diskDataFirst = currentDiskData(name: name)
             usleep(UInt32(Seconds(usleepSecond) * scanTime))
