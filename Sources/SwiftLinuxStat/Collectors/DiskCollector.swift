@@ -32,8 +32,8 @@ public extension SwiftLinuxStat {
                 result2.write = diskData.writeSectors
             }
         }
-        result.read = (result1.read - result2.read) * diskSectorSize
-        result.write = (result1.write - result2.write) * diskSectorSize
+        result.read = (result2.read - result1.read) * diskSectorSize
+        result.write = (result2.write - result1.write) * diskSectorSize
 
         return result
     }
@@ -54,8 +54,8 @@ public extension SwiftLinuxStat {
             result2.read += diskData.readSectors
             result2.write += diskData.writeSectors
         }
-        result.read = (result1.read - result2.read) * diskSectorSize
-        result.write = (result1.write - result2.write) * diskSectorSize
+        result.read = (result2.read - result1.read) * diskSectorSize
+        result.write = (result2.write - result1.write) * diskSectorSize
 
         return result
     }
