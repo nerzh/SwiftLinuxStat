@@ -11,6 +11,7 @@ import FileUtils
 public extension SwiftLinuxStat {
 
     class CPU {
+
         var scanTime: Seconds = 1
         var cpuDataFirst: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
         var cpuDataLast: CPUData = ("", 0, 0, 0, 0, 0, 0, 0, 0)
@@ -29,6 +30,8 @@ public extension SwiftLinuxStat {
             return result
         }
 
+        public init() {}
+
         func cpuLoad(name: String = "cpu", current: Bool = true, scanTime: Seconds = 1) -> Percent {
             var result: Percent = 0
             if current { update(name: name, scanTime: scanTime) }
@@ -36,7 +39,7 @@ public extension SwiftLinuxStat {
             let tIdle: Int = diffCPUData.idle + diffCPUData.iowait
             let tUsage: Int = tTotal - tIdle
             result = (Float(tUsage)/Float(tTotal)) * 100
-            
+
             return result
         }
 

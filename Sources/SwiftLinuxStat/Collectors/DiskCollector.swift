@@ -36,6 +36,8 @@ public extension SwiftLinuxStat {
             return result
         }
 
+        public init() {}
+
         /// 9       2 md2 1662164 0 32184250 0 247353783 0 7830748704 0 0 0 0
         func diskLoad(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad
