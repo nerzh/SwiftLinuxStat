@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftRegularExpression",
+        "repositoryURL": "https://github.com/nerzh/swift-regular-expression.git",
+        "state": {
+          "branch": null,
+          "revision": "957f5a37eff8e6a4efde69a32054e82428ae85a8",
+          "version": "0.2.2"
+        }
+      },
+      {
+        "package": "FileUtils",
+        "repositoryURL": "https://github.com/nerzh/SwiftFileUtils.git",
+        "state": {
+          "branch": null,
+          "revision": "e9c2e9e1590cb529c05b5e5d8370182d810098a9",
+          "version": "1.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
