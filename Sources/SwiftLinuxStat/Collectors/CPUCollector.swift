@@ -44,7 +44,7 @@ public extension SwiftLinuxStat {
         }
 
         @discardableResult
-        public func update(name: String, scanTime: Seconds = 1) -> Self {
+        public func update(name: String = "cpu", scanTime: Seconds = 1) -> Self {
             self.scanTime = scanTime
             cpuDataFirst = currentCPUData(name: name)
             usleep(UInt32(Seconds(usleepSecond) * scanTime))
