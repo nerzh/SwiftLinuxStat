@@ -42,16 +42,16 @@ public extension SwiftLinuxStat {
         public func diskLoad(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad
             if current { update(name: name, scanTime: scanTime) }
-            result.read = diffDiskData.readSectors * SwiftLinuxStat.diskSectorSize
-            result.write = diffDiskData.writeSectors * SwiftLinuxStat.diskSectorSize
+            result.read = SwiftLinuxStat.BytesFloat(diffDiskData.readSectors * SwiftLinuxStat.diskSectorSize)
+            result.write = SwiftLinuxStat.BytesFloat(diffDiskData.writeSectors * SwiftLinuxStat.diskSectorSize)
 
             return result
         }
 
         public func diskLoadPerSecond(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad = diskLoad(name: name, current: current, scanTime: scanTime)
-            result.read = result.read / self.scanTime
-            result.write = result.write / self.scanTime
+            result.read = result.read / Float(self.scanTime)
+            result.write = result.write / Float(self.scanTime)
 
             return result
         }

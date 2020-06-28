@@ -43,8 +43,8 @@ public extension SwiftLinuxStat {
         public func netLoad(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
             var result: NetLoad = (0, 0)
             if current { update(interface: interface, scanTime: scanTime) }
-            result.receive = diffNetData.bytesRx
-            result.transmit = diffNetData.bytesTx
+            result.receive = SwiftLinuxStat.BytesFloat(diffNetData.bytesRx)
+            result.transmit = SwiftLinuxStat.BytesFloat(diffNetData.bytesTx)
 
             return result
         }
@@ -52,8 +52,8 @@ public extension SwiftLinuxStat {
         public func netLoadPerSecond(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
             var result: NetLoad = (0, 0)
             if current { update(interface: interface, scanTime: scanTime) }
-            result.receive = diffNetData.bytesRx / scanTime
-            result.transmit = diffNetData.bytesTx / scanTime
+            result.receive = SwiftLinuxStat.BytesFloat(diffNetData.bytesRx) / SwiftLinuxStat.BytesFloat(scanTime)
+            result.transmit = SwiftLinuxStat.BytesFloat(diffNetData.bytesTx) / SwiftLinuxStat.BytesFloat(scanTime)
 
             return result
         }

@@ -12,12 +12,12 @@ import Foundation
 public extension SwiftLinuxStat {
 
     typealias Bytes = Int
-    typealias BytesFloat = Int
+    typealias BytesFloat = Float
     typealias KBytes = Int
-    typealias Seconds = Int
+    typealias Seconds = Float
     typealias BytesPerSecond = Int
     typealias Percent = Float
-    typealias DiskLoad = (read: Bytes , write: Bytes)
+    typealias DiskLoad = (read: BytesFloat , write: BytesFloat)
     typealias DiskIOs = (readIOs: Float , writeIOs: Float)
     typealias NetLoad = (receive: BytesFloat , transmit: BytesFloat)
     typealias MemLoad = MemData
