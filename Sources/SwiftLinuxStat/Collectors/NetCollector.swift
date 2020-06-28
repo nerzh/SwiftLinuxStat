@@ -49,7 +49,7 @@ public extension SwiftLinuxStat {
             return result
         }
 
-        public func netLoadPerSceond(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
+        public func netLoadPerSecond(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
             var result: NetLoad = (0, 0)
             if current { update(interface: interface, scanTime: scanTime) }
             result.receive = diffNetData.bytesRx / scanTime
