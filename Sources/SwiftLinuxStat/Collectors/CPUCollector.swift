@@ -35,10 +35,10 @@ public extension SwiftLinuxStat {
         public func cpuLoad(name: String = "cpu", current: Bool = true, scanTime: Seconds = 1) -> Percent {
             var result: Percent = 0
             if current { update(name: name, scanTime: scanTime) }
-            let tTotal: Int = diffCPUData.user + diffCPUData.nice + diffCPUData.system + diffCPUData.idle + diffCPUData.iowait + diffCPUData.irq + diffCPUData.softirq + diffCPUData.steal
-            let tIdle: Int = diffCPUData.idle + diffCPUData.iowait
-            let tUsage: Int = tTotal - tIdle
-            result = (Float(tUsage)/Float(tTotal)) * 100
+            let tTotal: Float = diffCPUData.user + diffCPUData.nice + diffCPUData.system + diffCPUData.idle + diffCPUData.iowait + diffCPUData.irq + diffCPUData.softirq + diffCPUData.steal
+            let tIdle: Float = diffCPUData.idle + diffCPUData.iowait
+            let tUsage: Float = tTotal - tIdle
+            result = (tUsage / tTotal) * 100
 
             return result
         }
@@ -84,14 +84,14 @@ public extension SwiftLinuxStat {
             let matches: [Int: String] = line.regexp(pattern)
             if matches[0] != nil {
                 result.name = matches[1]!
-                result.user = Int(matches[2]!)!
-                result.nice = Int(matches[3]!)!
-                result.system = Int(matches[4]!)!
-                result.idle = Int(matches[5]!)!
-                result.iowait = Int(matches[6]!)!
-                result.irq = Int(matches[7]!)!
-                result.softirq = Int(matches[8]!)!
-                result.steal = Int(matches[9]!)!
+                result.user = Float(matches[2]!)!
+                result.nice = Float(matches[3]!)!
+                result.system = Float(matches[4]!)!
+                result.idle = Float(matches[5]!)!
+                result.iowait = Float(matches[6]!)!
+                result.irq = Float(matches[7]!)!
+                result.softirq = Float(matches[8]!)!
+                result.steal = Float(matches[9]!)!
             }
 
             return result

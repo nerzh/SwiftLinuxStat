@@ -43,8 +43,8 @@ public extension SwiftLinuxStat {
         public func netLoad(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
             var result: NetLoad = (0, 0)
             if current { update(interface: interface, scanTime: scanTime) }
-            result.receive = SwiftLinuxStat.BytesFloat(diffNetData.bytesRx)
-            result.transmit = SwiftLinuxStat.BytesFloat(diffNetData.bytesTx)
+            result.receive = diffNetData.bytesRx
+            result.transmit = diffNetData.bytesTx
 
             return result
         }
@@ -52,8 +52,8 @@ public extension SwiftLinuxStat {
         public func netLoadPerSecond(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
             var result: NetLoad = (0, 0)
             if current { update(interface: interface, scanTime: scanTime) }
-            result.receive = SwiftLinuxStat.BytesFloat(diffNetData.bytesRx) / SwiftLinuxStat.BytesFloat(scanTime)
-            result.transmit = SwiftLinuxStat.BytesFloat(diffNetData.bytesTx) / SwiftLinuxStat.BytesFloat(scanTime)
+            result.receive = diffNetData.bytesRx / scanTime
+            result.transmit = diffNetData.bytesTx / scanTime
 
             return result
         }
@@ -92,22 +92,22 @@ public extension SwiftLinuxStat {
             let matches: [Int: String] = line.regexp(pattern)
             if matches[0] != nil {
                 result.interface = matches[1]!
-                result.bytesRx = Int(matches[2]!)!
-                result.packetsRx = Int(matches[3]!)!
-                result.errsRx = Int(matches[4]!)!
-                result.dropRx = Int(matches[5]!)!
-                result.fifoRx = Int(matches[6]!)!
-                result.frameRx = Int(matches[7]!)!
-                result.compressedRx = Int(matches[8]!)!
-                result.multicastRx = Int(matches[9]!)!
-                result.bytesTx = Int(matches[10]!)!
-                result.packetsTx = Int(matches[11]!)!
-                result.errsTx = Int(matches[12]!)!
-                result.dropTx = Int(matches[13]!)!
-                result.fifoTx = Int(matches[14]!)!
-                result.frameTx = Int(matches[15]!)!
-                result.compressedTx = Int(matches[16]!)!
-                result.multicastTx = Int(matches[17]!)!
+                result.bytesRx = Float(matches[2]!)!
+                result.packetsRx = Float(matches[3]!)!
+                result.errsRx = Float(matches[4]!)!
+                result.dropRx = Float(matches[5]!)!
+                result.fifoRx = Float(matches[6]!)!
+                result.frameRx = Float(matches[7]!)!
+                result.compressedRx = Float(matches[8]!)!
+                result.multicastRx = Float(matches[9]!)!
+                result.bytesTx = Float(matches[10]!)!
+                result.packetsTx = Float(matches[11]!)!
+                result.errsTx = Float(matches[12]!)!
+                result.dropTx = Float(matches[13]!)!
+                result.fifoTx = Float(matches[14]!)!
+                result.frameTx = Float(matches[15]!)!
+                result.compressedTx = Float(matches[16]!)!
+                result.multicastTx = Float(matches[17]!)!
             }
 
             return result

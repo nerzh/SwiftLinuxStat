@@ -50,8 +50,8 @@ public extension SwiftLinuxStat {
 
         public func diskLoadPerSecond(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskLoad {
             var result: DiskLoad = diskLoad(name: name, current: current, scanTime: scanTime)
-            result.read = result.read / Float(self.scanTime)
-            result.write = result.write / Float(self.scanTime)
+            result.read = result.read / self.scanTime
+            result.write = result.write / self.scanTime
 
             return result
         }
@@ -59,15 +59,15 @@ public extension SwiftLinuxStat {
         public func diskIOs(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> DiskIOs {
             var result: DiskIOs
             if current { update(name: name, scanTime: scanTime) }
-            result.readIOs = Float(diffDiskData.readIO) / Float(self.scanTime)
-            result.writeIOs = Float(diffDiskData.writeIO) / Float(self.scanTime)
+            result.readIOs = diffDiskData.readIO / self.scanTime
+            result.writeIOs = diffDiskData.writeIO / self.scanTime
 
             return result
         }
 
         public func diskBusy(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> Percent {
             if current { update(name: name, scanTime: scanTime) }
-            return 100 * Float(diffDiskData.ioTicks) / (1000 * Float(self.scanTime))
+            return 100 * diffDiskData.ioTicks / (1000 * self.scanTime)
         }
 
         @discardableResult
@@ -134,20 +134,20 @@ public extension SwiftLinuxStat {
             let pattern: String = #"^\s*(\d+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$"#
             let matches: [Int: String] = line.regexp(pattern)
             if matches[0] != nil {
-                result.majorNumber = Int(matches[1]!)!
-                result.minorNumber = Int(matches[2]!)!
+                result.majorNumber = Float(matches[1]!)!
+                result.minorNumber = Float(matches[2]!)!
                 result.deviceName = matches[3]!
-                result.readIO = Int(matches[4]!)!
-                result.readMerges = Int(matches[5]!)!
-                result.readSectors = Int(matches[6]!)!
-                result.readTicks = Int(matches[7]!)!
-                result.writeIO = Int(matches[8]!)!
-                result.writeMerges = Int(matches[9]!)!
-                result.writeSectors = Int(matches[10]!)!
-                result.writeTicks = Int(matches[11]!)!
-                result.inFlight = Int(matches[12]!)!
-                result.ioTicks = Int(matches[13]!)!
-                result.timeInQueue = Int(matches[14]!)!
+                result.readIO = Float(matches[4]!)!
+                result.readMerges = Float(matches[5]!)!
+                result.readSectors = Float(matches[6]!)!
+                result.readTicks = Float(matches[7]!)!
+                result.writeIO = Float(matches[8]!)!
+                result.writeMerges = Float(matches[9]!)!
+                result.writeSectors = Float(matches[10]!)!
+                result.writeTicks = Float(matches[11]!)!
+                result.inFlight = Float(matches[12]!)!
+                result.ioTicks = Float(matches[13]!)!
+                result.timeInQueue = Float(matches[14]!)!
             }
             return result
         }

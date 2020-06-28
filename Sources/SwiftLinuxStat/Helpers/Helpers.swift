@@ -11,63 +11,63 @@ import Foundation
 
 public extension SwiftLinuxStat {
 
-    typealias Bytes = Int
+    typealias Bytes = Float
     typealias BytesFloat = Float
-    typealias KBytes = Int
+    typealias KBytes = Float
     typealias Seconds = Float
-    typealias BytesPerSecond = Int
+    typealias BytesPerSecond = Float
     typealias Percent = Float
     typealias DiskLoad = (read: BytesFloat , write: BytesFloat)
     typealias DiskIOs = (readIOs: Float , writeIOs: Float)
     typealias NetLoad = (receive: BytesFloat , transmit: BytesFloat)
     typealias MemLoad = MemData
     typealias DiskData = (
-        majorNumber: Int,
-        minorNumber: Int,
+        majorNumber: Float,
+        minorNumber: Float,
         deviceName: String,
-        readIO: Int,
-        readMerges: Int,
-        readSectors: Int,
-        readTicks: Int,
-        writeIO: Int,
-        writeMerges: Int,
-        writeSectors: Int,
-        writeTicks: Int,
-        inFlight: Int,
-        ioTicks: Int,
-        timeInQueue: Int
+        readIO: Float,
+        readMerges: Float,
+        readSectors: Float,
+        readTicks: Float,
+        writeIO: Float,
+        writeMerges: Float,
+        writeSectors: Float,
+        writeTicks: Float,
+        inFlight: Float,
+        ioTicks: Float,
+        timeInQueue: Float
     )
 
     typealias CPUData = (
         name: String,
-        user: Int,
-        nice: Int,
-        system: Int,
-        idle: Int,
-        iowait: Int,
-        irq: Int,
-        softirq: Int,
-        steal: Int
+        user: Float,
+        nice: Float,
+        system: Float,
+        idle: Float,
+        iowait: Float,
+        irq: Float,
+        softirq: Float,
+        steal: Float
     )
 
     typealias NetData = (
         interface: String,
         bytesRx: Bytes,
-        packetsRx: Int,
-        errsRx: Int,
-        dropRx: Int,
-        fifoRx: Int,
-        frameRx: Int,
-        compressedRx: Int,
-        multicastRx: Int,
+        packetsRx: Float,
+        errsRx: Float,
+        dropRx: Float,
+        fifoRx: Float,
+        frameRx: Float,
+        compressedRx: Float,
+        multicastRx: Float,
         bytesTx: Bytes,
-        packetsTx: Int,
-        errsTx: Int,
-        dropTx: Int,
-        fifoTx: Int,
-        frameTx: Int,
-        compressedTx: Int,
-        multicastTx: Int
+        packetsTx: Float,
+        errsTx: Float,
+        dropTx: Float,
+        fifoTx: Float,
+        frameTx: Float,
+        compressedTx: Float,
+        multicastTx: Float
     )
 
     typealias MemData = (

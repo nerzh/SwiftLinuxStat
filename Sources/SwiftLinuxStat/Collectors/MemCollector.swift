@@ -27,17 +27,17 @@ public extension SwiftLinuxStat {
                 if matches[0] == nil { return }
                 switch matches[1]! {
                 case "MemTotal":
-                    result.memTotal = Int(matches[2]!)!
+                    result.memTotal = KBytes(matches[2]!)!
                 case "MemFree":
-                    result.memFree = Int(matches[2]!)!
+                    result.memFree = KBytes(matches[2]!)!
                 case "MemAvailable":
-                    result.memAvailable = Int(matches[2]!)!
+                    result.memAvailable = KBytes(matches[2]!)!
                 case "Buffers":
-                    result.buffers = Int(matches[2]!)!
+                    result.buffers = KBytes(matches[2]!)!
                 case "SwapTotal":
-                    result.swapTotal = Int(matches[2]!)!
+                    result.swapTotal = KBytes(matches[2]!)!
                 case "SwapFree":
-                    result.swapFree = Int(matches[2]!)!
+                    result.swapFree = KBytes(matches[2]!)!
                 default:
                     break
                 }
