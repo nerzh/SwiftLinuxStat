@@ -62,7 +62,7 @@ public extension SwiftLinuxStat {
         }
 
         private func currentNetData(interface name: String?) -> NetData {
-            let statPath: String = "/proc/stat"
+            let statPath: String = "/proc/net/dev"
             var result: NetData = ("", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             let interface: String = name != nil ? name! : getDefaultInterface()
             try? FileUtils.readFileByLine(statPath) { (line) -> Bool in
