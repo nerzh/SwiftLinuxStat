@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
 import FileUtils
 
 public extension SwiftLinuxStat {
@@ -47,6 +45,15 @@ public extension SwiftLinuxStat {
             if current { update(interface: interface, scanTime: scanTime) }
             result.receive = diffNetData.bytesRx
             result.transmit = diffNetData.bytesTx
+
+            return result
+        }
+
+        public func netLoadPerSceond(interface: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> NetLoad {
+            var result: NetLoad = (0, 0)
+            if current { update(interface: interface, scanTime: scanTime) }
+            result.receive = diffNetData.bytesRx / scanTime
+            result.transmit = diffNetData.bytesTx / scanTime
 
             return result
         }

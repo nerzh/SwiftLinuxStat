@@ -12,12 +12,15 @@ import Foundation
 public extension SwiftLinuxStat {
 
     typealias Bytes = Int
+    typealias BytesFloat = Int
+    typealias KBytes = Int
     typealias Seconds = Int
     typealias BytesPerSecond = Int
     typealias Percent = Float
     typealias DiskLoad = (read: Bytes , write: Bytes)
     typealias DiskIOs = (readIOs: Float , writeIOs: Float)
-    typealias NetLoad = (receive: Bytes , transmit: Bytes)
+    typealias NetLoad = (receive: BytesFloat , transmit: BytesFloat)
+    typealias MemLoad = MemData
     typealias DiskData = (
         majorNumber: Int,
         minorNumber: Int,
@@ -49,7 +52,7 @@ public extension SwiftLinuxStat {
 
     typealias NetData = (
         interface: String,
-        bytesRx: Int,
+        bytesRx: Bytes,
         packetsRx: Int,
         errsRx: Int,
         dropRx: Int,
@@ -57,7 +60,7 @@ public extension SwiftLinuxStat {
         frameRx: Int,
         compressedRx: Int,
         multicastRx: Int,
-        bytesTx: Int,
+        bytesTx: Bytes,
         packetsTx: Int,
         errsTx: Int,
         dropTx: Int,
@@ -65,6 +68,15 @@ public extension SwiftLinuxStat {
         frameTx: Int,
         compressedTx: Int,
         multicastTx: Int
+    )
+
+    typealias MemData = (
+        memTotal: KBytes,
+        memFree: KBytes,
+        memAvailable: KBytes,
+        buffers: KBytes,
+        swapTotal: KBytes,
+        swapFree: KBytes
     )
 
     static var diskSectorSize: Bytes { 512 }
