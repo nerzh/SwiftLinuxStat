@@ -66,3 +66,26 @@ class Test {
 Test.init().test()
 
 ```
+
+## INSTALL
+
+```swift
+// swift-tools-version:5.2
+import PackageDescription
+
+let package = Package(
+    name: "Project",
+    dependencies: [
+        .package(name: "SwiftLinuxStat", url: "https://github.com/nerzh/SwiftLinuxStat.git", .upToNextMajor(from: "0.3.1")),
+    ],
+    targets: [
+        .target(
+            name: "App",
+            dependencies: [
+                .product(name: "SwiftLinuxStat", package: "SwiftLinuxStat"),
+            ]
+        ),
+        .target(name: "Run", dependencies: [.target(name: "App")])
+    ]
+)
+```
