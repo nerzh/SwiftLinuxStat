@@ -8,10 +8,28 @@ Swift library for collecting linux metrics
 Linux exposes detailed sub-system and device level statistics through procfs. These statistics are useful for system debugging as well as performance tuning. These statistics are often consumed through one-off analysis scripts or a number of command-line tools, such as, vmstat, iostat, netstat, sar, atop, collectl, numastat, and so on. There is a need to capture these statistics 24x7 in a cloud environment to support system health monitoring and alerting, live site incident triage and investigations, performance debugging, and capacity monitoring and planning with instruments like a Prometheus, Zabbix etc.
 
 
-- Disk
-- CPU
-- Net
-- RAM
+#### Metrics
+
+
+### Disk
+- diskLoad read: BytesFloat , write: BytesFloat 
+- diskLoadPerSecond read: BytesFloat , write: BytesFloat
+- diskIOs - Requests 
+- diskBusy - Number
+- diskSpace - KBytes
+
+
+### CPU
+- cpuLoad
+
+
+### Net
+- netLoad receive: BytesFloat, transmit: BytesFloat
+- netLoadPerSecond receive: BytesFloat, transmit: BytesFloat
+
+
+### RAM
+- memLoad (memTotal: KBytes, memFree: KBytes, memAvailable: KBytes, buffers: KBytes, swapTotal: KBytes, swapFree: KBytes)
 
 
 ## USAGE
