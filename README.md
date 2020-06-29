@@ -12,11 +12,11 @@ Linux exposes detailed sub-system and device level statistics through procfs. Th
 
 
 ### Disk
-- diskLoad read: BytesFloat , write: BytesFloat 
-- diskLoadPerSecond read: BytesFloat , write: BytesFloat
+- diskLoad (read: BytesFloat , write: BytesFloat) 
+- diskLoadPerSecond (read: BytesFloat , write: BytesFloat)
 - diskIOs - Requests 
 - diskBusy - Number
-- diskSpace - KBytes
+- diskSpace (name: String, size: KBytes, used: KBytes, avail: KBytes, use: Percent, mounted: String)
 
 
 ### CPU
@@ -24,8 +24,8 @@ Linux exposes detailed sub-system and device level statistics through procfs. Th
 
 
 ### Net
-- netLoad receive: BytesFloat, transmit: BytesFloat
-- netLoadPerSecond receive: BytesFloat, transmit: BytesFloat
+- netLoad (receive: BytesFloat, transmit: BytesFloat)
+- netLoadPerSecond (receive: BytesFloat, transmit: BytesFloat)
 
 
 ### RAM
