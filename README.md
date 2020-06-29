@@ -34,6 +34,27 @@ Linux exposes detailed sub-system and device level statistics through procfs. Th
 
 ## USAGE
 
+```swift
+let disk = SwiftLinuxStat.Disk()
+disk.update()                          // update data for statistic, default scanTime: 1 second
+disk.diskLoadPerSecond(current: false) // current: false - disable recalculate data for statistic
+disk.diskIOs(current: false)           // current: false - disable recalculate data for statistic
+
+// waiting ~ 1 second
+```
+or we get the same result with this code but longer 
+
+```swift
+let disk = SwiftLinuxStat.Disk()
+disk.diskLoadPerSecond()  // current: true, recalculate will last 1 second
+                          // scanTime: 1, default time for wait new data
+disk.diskIOs(scanTime: 2) // will wait for new data 2 seconds
+
+// waiting ~ 1 + 2 seconds
+```
+
+
+more examples
 
 ```swift
 import Foundation
@@ -68,7 +89,7 @@ class Test {
               collectorGroup.leave()
             }.start()
             
-            collectorGroup.wait() // collectors are waiting for each other
+            collectorGroup.wait() // collectors are waiting for each other ~ 1 second
             
             print("load", disk.diskLoadPerSecond(current: false)) // bytes
             print("io", disk.diskIOs(current: false)) // requests
