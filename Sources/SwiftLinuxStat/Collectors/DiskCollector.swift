@@ -78,9 +78,9 @@ public extension SwiftLinuxStat {
             var pattern: String = .init()
 
             if fullName != nil {
-                pattern = "\\s*\(fullName!)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+([\\S\\s]+?)(\\s+|$)"
+                pattern = "(\(fullName!))\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+([\\w/]+)(\\s+|$)"
             } else {
-                pattern = "\\s*([\\s\\S]+?)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(/)(\\s+|$)"
+                pattern = "([\\w/]+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+([\\w/]+)(\\s+|$)"
             }
 
             let out = try? systemCommand(command)
