@@ -18,8 +18,9 @@ public extension SwiftLinuxStat {
     typealias BytesPerSecond = Float
     typealias Percent = Float
     typealias DiskLoad = (read: BytesFloat , write: BytesFloat)
-    typealias DiskIOs = (readIOs: Float , writeIOs: Float)
-    typealias NetLoad = (receive: BytesFloat , transmit: BytesFloat)
+    typealias DiskSpace = (name: String, size: KBytes, used: KBytes, avail: KBytes, use: Percent, mounted: String)
+    typealias DiskIOs = (readIOs: Float, writeIOs: Float)
+    typealias NetLoad = (receive: BytesFloat, transmit: BytesFloat)
     typealias MemLoad = MemData
     typealias DiskData = (
         majorNumber: Float,

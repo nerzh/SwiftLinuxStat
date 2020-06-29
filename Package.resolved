@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SwiftExtensionsPack",
+        "repositoryURL": "https://github.com/nerzh/swift-extensions-pack.git",
+        "state": {
+          "branch": null,
+          "revision": "3a676d5b996cf22f1b53e0a9ccb997cc181a8d65",
+          "version": "0.4.1"
+        }
+      },
+      {
         "package": "SwiftRegularExpression",
         "repositoryURL": "https://github.com/nerzh/swift-regular-expression.git",
         "state": {

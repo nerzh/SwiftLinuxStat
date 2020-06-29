@@ -7,6 +7,7 @@
 
 import Foundation
 import FileUtils
+import SwiftExtensionsPack
 
 //#if os(Linux)
 public extension SwiftLinuxStat {
@@ -68,6 +69,31 @@ public extension SwiftLinuxStat {
         public func diskBusy(name: String? = nil, current: Bool = true, scanTime: Seconds = 1) -> Percent {
             if current { update(name: name, scanTime: scanTime) }
             return 100 * diffDiskData.ioTicks / (1000 * self.scanTime)
+        }
+
+        /// fullName like /dev/sda
+        public func diskSpace(fullName: String? = nil) -> DiskSpace {
+            var result: DiskSpace = ("", 0, 0, 0, 0, "")
+            let command: String = "df -k"
+            var pattern: String = .init()
+
+            if fullName != nil {
+                pattern = "\\s*\(fullName!)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(\\w+)(\\s+|$)"
+            } else {
+                pattern = "\\s*(\\w+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(/)(\\s+|$)"
+            }
+
+            let out = try? systemCommand(command)
+            if let matches: [Int: String] = out?.regexp(pattern), matches[0] != nil {
+                result.name = matches[1]!
+                result.size = KBytes(matches[2]!)!
+                result.used = KBytes(matches[3]!)!
+                result.avail = KBytes(matches[4]!)!
+                result.use = KBytes(matches[5]!)!
+                result.mounted = matches[6]!
+            }
+
+            return result
         }
 
         @discardableResult
