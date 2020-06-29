@@ -26,8 +26,8 @@ public extension SwiftLinuxStat {
             result.frameRx = netDataLast.frameRx - netDataFirst.frameRx
             result.compressedRx = netDataLast.compressedRx - netDataFirst.compressedRx
             result.multicastRx = netDataLast.multicastRx - netDataFirst.multicastRx
-            result.bytesTx = netDataLast.bytesRx - netDataFirst.bytesRx
-            result.packetsTx = netDataLast.bytesTx - netDataFirst.bytesTx
+            result.bytesTx = netDataLast.bytesTx - netDataFirst.bytesTx
+            result.packetsTx = netDataLast.packetsTx - netDataFirst.packetsTx
             result.errsTx = netDataLast.errsTx - netDataFirst.errsTx
             result.dropTx = netDataLast.dropTx - netDataFirst.dropTx
             result.fifoTx = netDataLast.fifoTx - netDataFirst.fifoTx
