@@ -71,16 +71,16 @@ public extension SwiftLinuxStat {
             return 100 * diffDiskData.ioTicks / (1000 * self.scanTime)
         }
 
-        /// fullName like /dev/sda
+        /// fullName like /dev/sda. Default disk mounted to /
         public func diskSpace(fullName: String? = nil) -> DiskSpace {
             var result: DiskSpace = ("", 0, 0, 0, 0, "")
             let command: String = "df -k"
             var pattern: String = .init()
 
             if fullName != nil {
-                pattern = "\\s*\(fullName!)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(\\w+)(\\s+|$)"
+                pattern = "\\s*\(fullName!)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+([\\S\\s]+?)(\\s+|$)"
             } else {
-                pattern = "\\s*(\\w+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(/)(\\s+|$)"
+                pattern = "\\s*([\\s\\S]+?)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)%\\s+(/)(\\s+|$)"
             }
 
             let out = try? systemCommand(command)
