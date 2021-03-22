@@ -141,23 +141,66 @@ public extension SwiftLinuxStat {
             return result
         }
 
-        ///    major number
-        ///    minor mumber
-        ///    device name
-        ///    read I/Os       requests      number of read I/Os processed
-        ///    read merges     requests      number of read I/Os merged with in-queue I/O
-        ///    read sectors    sectors       number of sectors read
-        ///    read ticks      milliseconds  total wait time for read requests
-        ///    write I/Os      requests      number of write I/Os processed
-        ///    write merges    requests      number of write I/Os merged with in-queue I/O
-        ///    write sectors   sectors       number of sectors written
-        ///    write ticks     milliseconds  total wait time for write requests
-        ///    in_flight       requests      number of I/Os currently in flight
-        ///    io_ticks        milliseconds  total time this block device has been active
-        ///    time_in_queue   milliseconds  total wait time for all requests
+        // OLD
+        ///    1 major number
+        ///    2 minor mumber
+        ///    3 device name
+        ///    4 read I/Os       requests      number of read I/Os processed
+        ///    5 read merges     requests      number of read I/Os merged with in-queue I/O
+        ///    6 read sectors    sectors       number of sectors read
+        ///    7 read ticks      milliseconds  total wait time for read requests
+        ///    8  write I/Os      requests      number of write I/Os processed
+        ///    9 write merges    requests      number of write I/Os merged with in-queue I/O
+        ///    10 write sectors   sectors       number of sectors written
+        ///    11 write ticks     milliseconds  total wait time for write requests
+        ///    12 in_flight       requests      number of I/Os currently in flight
+        ///    13 io_ticks        milliseconds  total time this block device has been active
+        ///    14 time_in_queue   milliseconds  total wait time for all requests
+
+        // NEW
+//        https://www.kernel.org/doc/Documentation/ABI/testing/procfs-diskstats
+//        The /proc/diskstats file displays the I/O statistics
+//                of block devices. Each line contains the following 14
+//                fields:
+//
+//                ==  ===================================
+///                 1  major number
+///                 2  minor mumber
+///                 3  device name
+///                 4  reads completed successfully
+///                 5  reads merged
+///                 6  sectors read
+///                 7  time spent reading (ms)
+///                 8  writes completed
+///                 9  writes merged
+///                10  sectors written
+///                11  time spent writing (ms)
+///                12  I/Os currently in progress
+///                13  time spent doing I/Os (ms)
+///                14  weighted time spent doing I/Os (ms)
+//                ==  ===================================
+//
+//                Kernel 4.18+ appends four more fields for discard
+//                tracking putting the total at 18:
+//
+//                ==  ===================================
+///                15  discards completed successfully
+///                16  discards merged
+///                17  sectors discarded
+///                18  time spent discarding
+//                ==  ===================================
+//
+//                Kernel 5.5+ appends two more fields for flush requests:
+//
+//                ==  =====================================
+///                19  flush requests completed successfully
+///                20  time spent flushing
+//                ==  =====================================
+//
+//                For more details refer to Documentation/admin-guide/iostats.rst
         func getDiskData(_ line: String) -> DiskData {
             var result: DiskData = (0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            let pattern: String = #"^\s*(\d+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$"#
+            let pattern: String = #"^\s*(\d+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*"#
             let matches: [Int: String] = line.regexp(pattern)
             if matches[0] != nil {
                 result.majorNumber = Float(matches[1]!)!
