@@ -16,7 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "FileUtils", url: "https://github.com/nerzh/SwiftFileUtils.git", from: "1.1.0"),
-        .package(name: "SwiftExtensionsPack", url: "https://github.com/nerzh/swift-extensions-pack.git", from: "0.4.1"),
+        .package(name: "SwiftExtensionsPack", url: "https://github.com/nerzh/swift-extensions-pack.git", from: "1.0.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
